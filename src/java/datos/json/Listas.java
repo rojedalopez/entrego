@@ -91,7 +91,8 @@ public class Listas {
                 
                 if(!q.isEmpty()){
                     instruccion += " AND ( nombre_usuario like '%"+q+"%' OR apellido_usuario like '%"+q+"%' " +
-                    " OR nombre_mensajero like '%"+q+"%' OR apellido_mensajero like '%"+q+"%') ";
+                    " OR nombre_mensajero like '%"+q+"%' OR apellido_mensajero like '%"+q+"%' " +
+                    " OR do.desc_direccion like '%"+q+"%' OR dd.desc_direccion like '%"+q+"%') ";
                 }
                 
                 instruccion+=      " ORDER BY creacion_servicio DESC ";	        
@@ -194,6 +195,131 @@ public class Listas {
         return 0;
     }       
     
+   public static JSONObject listaMensajeros(int proyecto, int porpage, int pageno, String q) throws SQLException{
+        JSONArray lista=new JSONArray();        
+        JSONObject retorno = new JSONObject();
+        PreparedStatement st = null;
+        Connection conn=null;
+        ResultSet datos=null;
+        
+            try{
+                conn=conexion();
+                int desde = ((pageno-1)*porpage);
+                
+                String instruccion="SELECT cod_mensajero, nombre_mensajero, apellido_mensajero, celular_mensajero, " +
+                                    "direccion_mensajero, img_perfil_mensajero, email_mensajero FROM entrego.tblMensajero ";
+                
+                if(!q.isEmpty()){
+                    instruccion += " WHERE ";
+                    if(q.split(" ").length>0){
+                        String[] v = q.split(" ");
+                        for(int i=0; i<v.length; i++){
+                            if(i!=0){
+                                instruccion += " OR ";
+                            }
+                            instruccion += " ( cod_mensajero like '%"+v[i]+"%' OR nombre_mensajero like '%"+v[i]+"%' OR apellido_mensajero like '%"+v[i]+"%' " +
+                            " OR celular_mensajero like '%"+v[i]+"%' OR direccion_mensajero like '%"+v[i]+"%') ";
+                        }
+                    }else{
+                        instruccion += " ( cod_mensajero like '%"+q+"%' OR nombre_mensajero like '%"+q+"%' OR apellido_mensajero like '%"+q+"%' " +
+                        " OR celular_mensajero like '%"+q+"%' OR direccion_mensajero like '%"+q+"%') ";
+                    }
+                }
+                
+                instruccion+=      " ORDER BY cod_mensajero DESC ";	        
+                instruccion+=      " LIMIT "+desde+","+porpage+";";
+                
+                System.out.println(instruccion);
+                
+                st=conn.prepareStatement(instruccion);
+                datos=(ResultSet) st.executeQuery();
+                while (datos.next()) {
+                    JSONObject objeto= new JSONObject();
+                    objeto.put("cod_mensajero", datos.getString(1));
+                    objeto.put("nombre_mensajero", datos.getString(2));
+                    objeto.put("apellido_mensajero", datos.getString(3));
+                    objeto.put("celular_mensajero", datos.getString(4));
+                    objeto.put("direccion_mensajero", datos.getString(5));
+                    objeto.put("img_mensajero", datos.getString(6));
+                    objeto.put("correo_mensajero", datos.getString(7));
+                    lista.add(objeto);
+                }
+                
+                retorno.put("total_count", totalMensajeros(proyecto, q));
+                retorno.put("data", lista);
+                retorno.put("error", 0);
+                
+                return retorno;
+                
+            }catch (SQLException e) {
+            System.out.println("error SQLException en ObtenerUsuario");
+                    System.out.println(e.getMessage());
+            }catch (Exception e){
+                    System.out.println("error Exception en ObtenerUsuario");
+                    System.out.println(e.getMessage());
+            }finally{
+                if(conn!=null){
+                    if(!conn.isClosed()){
+                        conn.close();
+                    }
+                }
+            }
+            
+        retorno.put("total_count", 0);
+        retorno.put("data", "[]");
+        retorno.put("error", 0);
+
+        return retorno;
+    }
+    
+   public static int totalMensajeros(int proyecto, String q) throws SQLException{
+        PreparedStatement st = null;
+        Connection conn=null;
+        ResultSet datos=null;
+        
+            try{
+                conn=conexion();
+                String instruccion="SELECT COUNT(1) FROM entrego.tblMensajero ";
+                
+                if(!q.isEmpty()){
+                    instruccion += " WHERE ";
+                    if(q.split(" ").length>0){
+                        String[] v = q.split(" ");
+                        for(int i=0; i<v.length; i++){
+                            if(i!=0){
+                                instruccion += " OR ";
+                            }
+                            instruccion += " ( cod_mensajero like '%"+v[i]+"%' OR nombre_mensajero like '%"+v[i]+"%' OR apellido_mensajero like '%"+v[i]+"%' " +
+                            " OR celular_mensajero like '%"+v[i]+"%' OR direccion_mensajero like '%"+v[i]+"%') ";
+                        }
+                    }else{
+                        instruccion += " ( cod_mensajero like '%"+q+"%' OR nombre_mensajero like '%"+q+"%' OR apellido_mensajero like '%"+q+"%' " +
+                        " OR celular_mensajero like '%"+q+"%' OR direccion_mensajero like '%"+q+"%') ";
+                    }
+                }
+                
+                st=conn.prepareStatement(instruccion);
+                datos=(ResultSet) st.executeQuery();
+                if (datos.next()) {
+                    return datos.getInt(1);
+                }
+                
+            }catch (SQLException e) {
+            System.out.println("error SQLException en ObtenerUsuarioc");
+                    System.out.println(e.getMessage());
+            }catch (Exception e){
+                    System.out.println("error Exception en ObtenerUsuarioc");
+                    System.out.println(e.getMessage());
+            }finally{
+                if(conn!=null){
+                    if(!conn.isClosed()){
+                        conn.close();
+                    }
+                }
+            }
+        return 0;
+    }       
+   
     public static JSONArray listaVehiculosByEmpresa(String q, int carga, int estado, String nit) throws SQLException{
         JSONArray lista=new JSONArray();
         PreparedStatement st = null;

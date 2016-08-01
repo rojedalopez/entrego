@@ -1,0 +1,51 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" ng-show="title">
+        <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" ng-bind="title"></h4>
+      </div>
+        <div class="modal-body">
+            <table class="table table-bordered compact">
+            <tr>
+                <th colspan="2" style="background-color: #E8E8E8;text-align: center;">DATOS DEL SERVICIO</th>
+            </tr>
+            <tr>
+                <td style="background-color: #E8E8E8;width: 40%;">NUMERO DEL SERVICIO</td>
+                <td>{{servicio.cod_servicio}}</td>
+            </tr>
+            <tr>
+                <td style="background-color: #E8E8E8;width: 40%;">ESTADO</td>
+                <td>{{servicio.desc_estado}}</td>
+            </tr>
+            <tr>
+                    <td style="background-color: #E8E8E8;width: 40%;">ORIGEN</td>
+                    <td>{{servicio.dir_origen}}</td>
+            </tr>
+            <tr>
+                <td style="background-color: #E8E8E8;width: 40%;">DESTINO </td>
+                <td>{{servicio.dir_destino}}</td>
+            </tr>
+            <tr>
+                <th colspan="2" style="background-color: #E8E8E8;text-align: center;">DATOS DEL USUARIO</th>
+            </tr>
+            <tr>
+                <td style="background-color: #E8E8E8;width: 40%;">NOMBRE</td>
+                <td>{{servicio.nombre_usuario}}</td>
+            </tr>
+            <tr>
+                <td style="background-color: #E8E8E8;width: 40%;">APELLIDO</td>
+                <td>{{servicio.apellido_usuario}}</td>
+            </tr>
+            <tr>
+                <td style="background-color: #E8E8E8;width: 40%;">CELULAR</td>
+                <td>{{servicio.celular_usuario}}</td>
+            </tr>
+        </table>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

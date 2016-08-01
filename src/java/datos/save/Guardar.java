@@ -106,8 +106,17 @@ public class Guardar {
     pepino
     */
     public static void main(String[] args) throws ClassNotFoundException, SQLException, InvalidKeyException {
-        InsertUsuario("900876543", 2, "drogashabib@gmail.com", "habib", 2, "Superdrogueria Habib SAS", 
-                "", "318 2433264", "NIT", "JUD", "/");
+        //InsertUsuario("900876543", 2, "drogashabib@gmail.com", "habib", 2, "Superdrogueria Habib SAS", 
+          //      "", "318 2433264", "NIT", "JUD", "/");
+        
+        InsertMensajero("1076453281", "rojeda1@gmail.com", "rojeda", "Rodolfo", "Perez", "3454332", "Calle 1 NO 2 - 3", "23d43", "user2.jpg");
+        InsertMensajero("1076453284", "rojeda2@gmail.com", "rojeda", "Bernardo", "Perez", "3454332", "Calle 1 NO 2 - 3", "23d43", "user2.jpg");
+        InsertMensajero("1076453285", "rojeda3@gmail.com", "rojeda", "Juan", "Perez", "3454332", "Calle 1 NO 2 - 3", "23d43", "user2.jpg");
+        InsertMensajero("1076453286", "rojeda4@gmail.com", "rojeda", "Pedro", "Gomez", "3454332", "Calle 1 NO 2 - 3", "23d43", "user2.jpg");
+        InsertMensajero("1076453287", "rojeda5@gmail.com", "rojeda", "Luis", "Perez", "3454332", "Calle 1 NO 2 - 3", "23d43", "user2.jpg");
+        InsertMensajero("1076453288", "rojeda6@gmail.com", "rojeda", "Carlos", "Perez", "3454332", "Calle 1 NO 2 - 3", "23d43", "user2.jpg");
+        InsertMensajero("1076453289", "rojeda7@gmail.com", "rojeda", "Samanta", "Ferreira", "3454332", "Calle 1 NO 2 - 3", "23d43", "user2.jpg");
+        InsertMensajero("1076343283", "rolopez8@gmail.com", "rojeda", "Lucia", "Lopez", "3455532", "Calle 4 NO 2 - 3", "23d43", "user2.jpg");
     }
     
     
@@ -136,6 +145,54 @@ public class Guardar {
 
                 int retorno = cs.getInt(10);
                 
+                if(retorno==1){
+                    //Mails.SendMail(correo, token, "CONFIRMACIÓN DE CUENTA", "ACTIVAR");
+                    return true;
+                }else{
+                    return false;
+                }
+
+            }catch (SQLException e) {
+                System.out.println("error SQLException en INSERTAR USUARIO");
+                System.out.println(e.getMessage());
+            }catch (Exception e){
+                System.out.println("error Exception en INSERTAR USUARIO");
+                System.out.println(e.getMessage());
+            }finally{
+                if(!conn.isClosed()){
+                    conn.close();
+                }
+            }
+            return false;
+
+    }
+    
+    public static boolean InsertMensajero( String codigo, String  email,  String passw,  
+    String nombre, String apellido, String celular, String direccion, String path, String url_imagen) throws ClassNotFoundException, SQLException, InvalidKeyException{
+        boolean b=false;
+        Connection conn=null;
+        PreparedStatement insertar=null;
+        String hash = Metodos.RandomString(25, false);
+        String pass = Metodos.sha512(passw, hash);
+        String token = Metodos.RandomString(5, false);
+        
+        conn=conexion();
+            try (CallableStatement cs = conn.prepareCall("{CALL entrego.PROC_RegistrarMensajero(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}")) {
+                cs.setString(1, codigo);
+                cs.setString(2, email);
+                cs.setString(3, hash);
+                cs.setString(4, pass);
+                cs.setString(5, nombre);
+                cs.setString(6, apellido);
+                cs.setString(7, celular);
+                cs.setString(8, direccion);
+                cs.setString(9, token);
+                cs.setString(10, url_imagen);
+                cs.registerOutParameter(11, Types.INTEGER);
+                cs.executeQuery();
+
+                int retorno = cs.getInt(11);
+                System.err.println(retorno);
                 if(retorno==1){
                     //Mails.SendMail(correo, token, "CONFIRMACIÓN DE CUENTA", "ACTIVAR");
                     return true;

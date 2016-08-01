@@ -1,0 +1,54 @@
+
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" ng-show="title">
+        <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" ng-bind="title"></h4>
+      </div>
+        <div class="modal-body">
+            <form role="form" angular-validator-submit="sendAsignacion()" name="solicitud" 
+                  angular-validator novalidate>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Zona para operación:</label>
+                        <select class="form-control" ng-model="ticket.zona" 
+                        ng-options="zona.id as zona.desc for zona in zonas" ng-change="selectZonas(ticket.zona)"
+                        name="carga" clase="text_valid" required-message="'Debe seleccionar una opcion'" required>
+                            <option value="">--- Seleccione Zona ---</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Bahia de operación:</label>
+                        <select class="form-control" ng-model="ticket.bahia" 
+                        ng-options="bahia.id as bahia.desc for bahia in bahias" 
+                        name="carga" clase="text_valid" required-message="'Debe seleccionar una opcion'" required>
+                            <option value="">--- Seleccione Bahia ---</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha asignada:</label>
+                        <div class="input-group input-group-sm date" 
+                             datetimepicker ng-model="fecha_enturnado" options="ctrl.options" ng-disabled="reasignar">
+                              <input type="text" class="form-control" ng-disabled="reasignar"/>
+                              <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                              </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nota</label>
+                        <div class='input-group date'>
+                            <textarea rows="3" cols="80" class="form-control" ng-model="ticket.nota" ></textarea>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <button type="submit" class="btn btn-success">Enviar Asignacion</button>
+                        <button type="button" class="btn btn-default">Limpiar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
