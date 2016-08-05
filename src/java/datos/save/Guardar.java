@@ -310,18 +310,17 @@ public class Guardar {
             return false;
     }
     
-    public static boolean InsertRegistro(String id, String imei, String cod, int tipo) throws ClassNotFoundException, SQLException, InvalidKeyException{
+    public static boolean InsertRegistro(String id, String imei, String cod) throws ClassNotFoundException, SQLException{
         boolean b=false;
         Connection conn=null;
         PreparedStatement insertar=null;
         
         
         conn=conexion();
-            try (CallableStatement cs = conn.prepareCall("{CALL logycus360.new_device_id(?, ?, ?, ?)}")) {
+            try (CallableStatement cs = conn.prepareCall("{CALL entrego.PROC_RegistroPushME(?, ?, ?)}")) {
                 cs.setString(1, id);
                 cs.setString(2, imei);
                 cs.setString(3, cod);
-                cs.setInt(4, tipo);
                 
                 cs.executeQuery();
 

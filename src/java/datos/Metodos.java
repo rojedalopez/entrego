@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    --  ASIGNAR SOLO LOS PERSMIOS DE EJECUCION DE LOS PROCEDIMIENTOS DE ALMACENADO A ALGUN
+        USUARIO EN ESPECIFICO
+            GRANT EXECUTE ON PROCEDURE entrego.PROC_CrearMaestro TO 'drogas_habib';
+            GRANT EXECUTE ON PROCEDURE entrego.PROC_AdicionDetalle TO 'drogas_habib';
  */
 package datos;
 

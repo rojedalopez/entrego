@@ -1,3 +1,14 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+response.setHeader("Pragma", "No-chache"); 
+response.setHeader("Expires", "0"); 
+response.setHeader("Cache-Control", "no-cache"); 
+response.setHeader("Cache", "no-cache"); 
+if(session.getAttribute("user") == null){
+   //redirijo al login
+   response.sendRedirect("../entrego/?mensaje=Acabo su sesion.");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>        
@@ -12,6 +23,7 @@
         
         <!-- CSS INCLUDE -->        
         <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script> 
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
         <!-- Latest compiled and minified CSS -->
@@ -20,7 +32,6 @@
         
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
-        <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript" src="js/dataTables.responsive.min.js"></script>
@@ -102,7 +113,7 @@
                     </li>
                     <li class="xn-title">Navigation</li>
                     <li>
-                        <a href="index.html"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>                        
+                        <a href="principal.jsp"><span class="fa fa-desktop"></span> <span class="xn-text">Inicio</span></a>                        
                     </li>  
                     <li class="xn-openable active">
                         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Pages</span></a>
@@ -427,7 +438,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-body profile">
                                     <div class="profile-image">
-                                        <img src="{{mensajero.img_mensajero}}" alt="Nadia Ali"/>
+                                        <img src="{{mensajero.img_mensajero}}" alt="{{mensajero.nombre_mensajero}}" 
+                                        height="132px" width="114px"/>
                                     </div>
                                     <div class="profile-data">
                                         <div class="profile-data-name">{{mensajero.nombre_mensajero}}</div>

@@ -51,15 +51,15 @@ public class login_usuario extends HttpServlet {
 
                     session.setAttribute("usr", u.getNombre());
                     if(u.getRol()==2){
-                        response.sendRedirect((url_forward)?url:"/main.html");
+                        response.sendRedirect((url_forward)?url:"/entrego/servicios.jsp");
                     }
                     
                  }else{
                     System.out.println("error en: " +u.getMensaje());
-                    response.sendRedirect("?mensaje=Error en la autenticacion.");
+                    response.sendRedirect("/entrego/?mensaje=Error en la autenticacion.");
                 }
             }else{
-                response.sendRedirect("../?mensaje=No existe usuario.");                
+                response.sendRedirect("../entrego/?mensaje=No existe usuario.");                
             }
         }
         } catch (SQLException ex) {

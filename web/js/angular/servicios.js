@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('MyApp.Servicios', []).controller('ServiciosController', ['$http', '$templateCache', '$timeout', '$alert' , '$modal', 
-    function($http, $templateCache, $timeout, $alert, $modal) {
+angular.module('MyApp.Servicios', []).controller('ServiciosController', ['$http', '$templateCache', '$timeout', '$alert' , '$modal', 'NgMap',
+    function($http, $templateCache, $timeout, $alert, $modal, NgMap) {
     var vm = this;
     vm.busqueda={porpage:20, pageno:1, q:""};
     vm.servicios = [];
+    vm.direcciones = [];
     vm.servicio={cod_servicio:"", id_estado:"", desc_estado:"", id_dir_origen:"", dir_origen:"", 
     id_dir_destino:"", dir_destino:"", nota:"", creacion:"", cod_usuario:"", nombre_usuario:"",
     apellido_usuario:"", celular_usuario:"", cod_mensajero:"", nombre_mensajero:"",
@@ -12,6 +13,7 @@ angular.module('MyApp.Servicios', []).controller('ServiciosController', ['$http'
     vm.pageno = 1; // initialize page no to 1
     vm.total_count = 0;
     vm.itemsPerPage = 20; //this could be a dynamic value from a drop down
+    vm.dirAdicionales = [];
 
     vm.getData = function(pageno){ // This would fetch the data on page change.
         console.log("entro");
@@ -29,6 +31,32 @@ angular.module('MyApp.Servicios', []).controller('ServiciosController', ['$http'
         });
     };
     
+    vm.vehiculos = [{"lat":11.0041072,"lng":-74.80698129999996}];
+    vm.placeChanged = function() {
+      vm.place = this.getPlace();
+      console.log('location', vm.place.geometry.location);
+      vm.map.setCenter(vm.place.geometry.location);
+      vm.vehiculos.push({lat:vm.place.geometry.location.lat, lng:vm.place.geometry.location.lng});
+      console.log(vm.vehiculos.length);
+    };
+    
+    NgMap.getMap().then(function(map) {
+        vm.map = map;
+    });
+
+    vm.placeChanged = function() {
+        vm.place = this.getPlace();
+        vm.map.setCenter(vm.place.geometry.location);
+        vm.direcciones.push({desc:this.idDireccion, lat:vm.place.geometry.location.lat(), 
+            lng:vm.place.geometry.location.lng(), texto:vm.place.formatted_address});
+    };
+    
+    vm.add = function () {
+        vm.dirAdicionales.push({ 
+          texto: ""
+        });
+    };
+
     vm.getData(vm.pageno);
     
     vm.buscarPedido = function(){
@@ -46,11 +74,91 @@ angular.module('MyApp.Servicios', []).controller('ServiciosController', ['$http'
         
     }
     
+    vm.showDetail = function(e, direccion) {
+        console.log(direccion);
+        vm.direccion = direccion;
+        vm.map.showInfoWindow('foo-iw', direccion.texto);
+    };
+    
+    vm.deleteDireccion = function(objeto){
+        for(var i = 1; i < vm.direcciones.length; i++){
+            if(vm.direcciones[i].texto === objeto.texto){
+                vm.direcciones.splice(i, 1);
+                break;
+            }
+        }
+        
+        for(var i = 0; i < vm.dirAdicionales.length; i++){
+            if(vm.dirAdicionales[i].texto === objeto.texto){
+                vm.dirAdicionales.splice(i, 1);
+                break;
+            }
+        }
+    };
+    
+    vm.reloadMap = function(){ 
+        console.log("hp");
+        google.maps.event.trigger(vm.map, 'resize');
+    };
+    
+     function ServicioController($scope) {
+        $scope.title = 'Detalle de servicio';
+        $scope.servicio = vm.servicio;
+        $scope.nameOrigin = null;
+
+        $scope.direcciones = [];
+        $scope.placeChanged = function(ds) {
+            google.maps.event.trigger(map, 'resize');
+          $scope.place = this.getPlace();
+          $scope.map.setCenter($scope.place.geometry.location);
+          $scope.direcciones[ds] = {descripcion:ds,lat:$scope.place.geometry.location.lat(), 
+              lng:$scope.place.geometry.location.lng(), texto:$scope.place.formatted_address};
+          console.log($scope.direcciones);
+        };
+           
+         NgMap.getMap({ id: 'dialogMap' }).then(function(map) {
+            $scope.dialogMap = map;
+            google.maps.event.addListenerOnce($scope.dialogMap, 'idle', function(){
+                 vm.mapSettings = { center: $scope.dialogMap.center, zoom: 7};
+            });    
+
+        });
+        
+         $scope.showDetail = function(e, direccion) {
+            console.log(vehiculo);
+            $scope.direccion = direccion;
+            $scope.map.showInfoWindow('foo-iw', direccion.desc);
+        };
+        
+        $scope.disableTap = function(event) {
+
+            var input = event.target;
+
+            // Get the predictions element
+            var container = document.getElementsByClassName('pac-container');
+            container = angular.element(container);
+
+            // Apply css to ensure the container overlays the other elements, and
+            // events occur on the element not behind it
+            container.css('z-index', '5000');
+            container.css('pointer-events', 'auto');
+
+            // Disable ionic data tap
+            container.attr('data-tap-disabled', 'true');
+
+            // Leave the input field if a prediction is chosen
+            container.on('click', function(){
+                input.blur();
+            });
+        };
+        
+    }
+    
        
      MyModalController.$inject = ['$scope'];
     var myAlert = $alert({title: 'Holy guacamole!', content: 'Best check yo self, you\'re not looking too good.', placement: 'top', type: 'success', container:'#alerta-busqueda', show: false});
     var detServicio = $modal({controller: MyModalController, templateUrl: 'modal/det-servicio.html', show: false});
-    
+    //var mdlservicio = $modal({controller: ServicioController, templateUrl: 'modal/servicio.html', show: true});
     
     vm.showAlert = function() {
       myAlert.show(); // or myAlert.$promise.then(myAlert.show) if you use an external html template
@@ -59,6 +167,11 @@ angular.module('MyApp.Servicios', []).controller('ServiciosController', ['$http'
     
     vm.showModalServ = function() {
       detServicio.show();
+    };
+    
+    vm.showModalPedido = function() {
+      modalServicio.modal('show');
+      //mdlservicio.show();
     };
     
     vm.verDetalleServ = function(id){
@@ -194,6 +307,7 @@ angular.module('MyApp.Servicios', []).controller('ServiciosController', ['$http'
     var detMensajero = $modal({controller: MyModalController, templateUrl: 'modal/det-servicio.html', show: false});
     
     
+    
     vm.showAlert = function() {
       myAlert.show(); // or myAlert.$promise.then(myAlert.show) if you use an external html template
     };
@@ -203,6 +317,7 @@ angular.module('MyApp.Servicios', []).controller('ServiciosController', ['$http'
       detMensajero.show();
     };
     
+
     vm.verDetalleServ = function(id){
         console.log(id);
         for(var i = 0; i < vm.mensajeros.length; i++){

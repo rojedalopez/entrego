@@ -11,43 +11,15 @@
         <!-- END META SECTION -->
         
         <!-- CSS INCLUDE -->        
-        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script> 
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
-        <!-- Latest compiled and minified CSS -->
-        <link href="css/dataTables.bootstrap.min.css" rel="stylesheet" />
         <!-- EOF CSS INCLUDE -->                                    
         
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/dataTables.responsive.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.js"></script>        
+        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>        
         <!-- END PLUGINS -->
-        
-        <script src="js/angular.min.js"></script>
-        <script src="js/angular-strap.min.js"></script>
-        <script src="js/angular-strap.tpl.min.js"></script>
-        <script src="js/angular-animate.js"></script>
-        <script src="js/ui-bootstrap-tpls-2.0.0.js"></script>
-
-        <script src="js/bootstrap.min.js"></script>  
-        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/dataTables.responsive.min.js"></script>
-        <script src="js/moment.min.js"></script>
-        <script src="js/bootstrap-datetimepicker.min.js"></script>
-        <script src="js/angular-eonasdan-datetimepicker.min.js"></script>
-        <script src="js/dist/angular-datatables.min.js"></script>
-        
-        <script type="text/javascript" src="js/angular/dirPagination.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>      
-        <script type="text/javascript" src="js/angular/angular-validator.js"></script>
-        <script type="text/javascript" src="js/angular/ng-map.min.js"></script>
-        <script type="text/javascript" src="js/angular/servicios.js"></script>
-        
 
         <!-- START THIS PAGE PLUGINS-->        
         <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>        
@@ -55,24 +27,38 @@
         <script type="text/javascript" src="js/plugins/scrolltotop/scrolltopcontrol.js"></script>
         
         <script type="text/javascript" src="js/plugins/morris/raphael-min.js"></script>
-        <script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>               
+        <script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>       
+        <script type="text/javascript" src="js/plugins/rickshaw/d3.v3.js"></script>
+        <script type="text/javascript" src="js/plugins/rickshaw/rickshaw.min.js"></script>
+        <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+        <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>                
+        <script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>                
+        <script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>                 
         
         <script type="text/javascript" src="js/plugins/moment.min.js"></script>
         <script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script>
         <!-- END THIS PAGE PLUGINS-->        
+
+        <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/plugins/tableexport/tableExport.js"></script>
+	<script type="text/javascript" src="js/plugins/tableexport/jquery.base64.js"></script>
+	<script type="text/javascript" src="js/plugins/tableexport/html2canvas.js"></script>
+	<script type="text/javascript" src="js/plugins/tableexport/jspdf/libs/sprintf.js"></script>
+	<script type="text/javascript" src="js/plugins/tableexport/jspdf/jspdf.js"></script>
+	<script type="text/javascript" src="js/plugins/tableexport/jspdf/libs/base64.js"></script>
         
         <!-- START TEMPLATE -->
         <script type="text/javascript" src="js/settings.js"></script>
         
-        <script type="text/javascript" src="js/plugins.js"></script>        
+  
         <script type="text/javascript" src="js/actions.js"></script>
         
         <script type="text/javascript" src="js/demo_dashboard.js"></script>
         
     </head>
-    <body ng-app="myApp" class="ng-cloak">
+    <body>
         <!-- START PAGE CONTAINER -->
-        <div class="page-container" ng-controller="ServiciosController as ctrl">
+        <div class="page-container">
             
             <!-- START PAGE SIDEBAR -->
             <div class="page-sidebar">
@@ -388,7 +374,7 @@
                         <div class="col-md-3">
                             
                             <!-- START WIDGET REGISTRED -->
-                            <div class="widget widget-default widget-item-icon" onclick="location.href='pages-address-book.html';">
+                            <div class="widget widget-default widget-item-icon" data-toggle="modal" data-target="#ForgotPass">
                                 <div class="widget-item-left">
                                     <span class="fa fa-user"></span>
                                 </div>
@@ -467,65 +453,96 @@
                             
                                         <!-- START DATATABLE EXPORT -->
                                         <div class="panel panel-default">
-                                            <div class="row">
-                        <div class="col-md-12">
-                            
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                                <p>Utiliza este campo para buscar algún pedido. Puedes buscarlo por: numero de pedido, punto de inicio, punto final.</p>
-                                                <form class="form-horizontal">
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <span class="fa fa-search"></span>
-                                                                </div>
-                                                                <input type="text" ng-model="ctrl.busqueda.q" class="form-control" placeholder="A quien buscabas?"/>
-                                                                <div class="input-group-btn">
-                                                                    <button class="btn btn-primary" ng-click="ctrl.buscarPedido()">Buscar</button>
-                                                                </div>
-                                                                <div class="input-group-btn">
-                                                                    <button class="btn btn-default" ng-click="ctrl.limpiarPedidos()">Limpiar</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>                                    
-                                            </div>
-                                        </div>
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">AQUI SE COLOCA EL ESTAOD</h3>
+                                                <div class="btn-group pull-right">
+                                                    <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Data</button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#" onClick ="$('#customers2').tableExport({type:'excel',escape:'false'});"><img src='img/icons/xls.png' width="24"/> XLS</a></li>
+                                                        <li><a href="#" onClick ="$('#customers2').tableExport({type:'pdf',escape:'false'});"><img src='img/icons/pdf.png' width="24"/> PDF</a></li>
+                                                    </ul>
+                                                </div>                                    
 
-                                    </div>
-                                </div>
+                                            </div>
                                             <div class="panel-body">
-                                                <table class="table table-striped table-bordered dt-responsive compact table-hover" width="100%" cellspacing="0" datatable="ng" dt-options="ctrl.dtOptions" id="dataTables-regs">
+                                                <table id="customers2" class="table datatable">
                                                     <thead>
                                                         <tr>
-                                                            <th># Servicio</th>
-                                                            <th>Estado</th>
-                                                            <th>Origen</th>
-                                                            <th>Destino</th>
-                                                            <th></th>
-                                                            <th></th>
+                                                            <th>Name</th>
+                                                            <th>Position</th>
+                                                            <th>Office</th>
+                                                            <th>Age</th>
+                                                            <th>Start date</th>
+                                                            <th>Salary</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr dir-paginate="servicio in ctrl.servicios | itemsPerPage:ctrl.itemsPerPage: 'Regs'" pagination-id="Regs" total-items="ctrl.total_count">
-                                                            <td>{{servicio.cod_servicio}}</td>
-                                                            <td>{{servicio.desc_estado}}</td>
-                                                            <td>{{servicio.dir_origen}}</td>
-                                                            <td>{{servicio.dir_destino}}</td>
-                                                            <td style="text-align: center;"> <i class="fa fa-info-circle fa-2x" style="cursor: pointer;" ng-click="ctrl.verDetalleServ(servicio.cod_servicio)"></i></td>
-                                                            <td style="text-align: center;"> <i class="fa fa-cogs fa-2x" style="cursor: pointer;" ng-click="ctrl.verDetalleServ(servicio.cod_servicio)"></i></td>
+                                                        <tr>
+                                                            <td>Tiger Nixon</td>
+                                                            <td>System Architect</td>
+                                                            <td>Edinburgh</td>
+                                                            <td>61</td>
+                                                            <td>2011/04/25</td>
+                                                            <td>$320,800</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Garrett Winters</td>
+                                                            <td>Accountant</td>
+                                                            <td>Tokyo</td>
+                                                            <td>63</td>
+                                                            <td>2011/07/25</td>
+                                                            <td>$170,750</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ashton Cox</td>
+                                                            <td>Junior Technical Author</td>
+                                                            <td>San Francisco</td>
+                                                            <td>66</td>
+                                                            <td>2009/01/12</td>
+                                                            <td>$86,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Cedric Kelly</td>
+                                                            <td>Senior Javascript Developer</td>
+                                                            <td>Edinburgh</td>
+                                                            <td>22</td>
+                                                            <td>2012/03/29</td>
+                                                            <td>$433,060</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Airi Satou</td>
+                                                            <td>Accountant</td>
+                                                            <td>Tokyo</td>
+                                                            <td>33</td>
+                                                            <td>2008/11/28</td>
+                                                            <td>$162,700</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Brielle Williamson</td>
+                                                            <td>Integration Specialist</td>
+                                                            <td>New York</td>
+                                                            <td>61</td>
+                                                            <td>2012/12/02</td>
+                                                            <td>$372,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Herrod Chandler</td>
+                                                            <td>Sales Assistant</td>
+                                                            <td>San Francisco</td>
+                                                            <td>59</td>
+                                                            <td>2012/08/06</td>
+                                                            <td>$137,500</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Rhona Davidson</td>
+                                                            <td>Integration Specialist</td>
+                                                            <td>Tokyo</td>
+                                                            <td>55</td>
+                                                            <td>2010/10/14</td>
+                                                            <td>$327,900</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <dir-pagination-controls
-                                                    max-size="8"
-                                                    direction-links="true"
-                                                    boundary-links="true" 
-                                                    on-page-change="ctrl.getData(newPageNumber)"
-                                                    pagination-id="Regs">
-                                                </dir-pagination-controls>
                                             </div>
                                         </div>
                                     </div>
@@ -545,7 +562,200 @@
             <!-- END PAGE CONTENT -->
         </div>
         <!-- END PAGE CONTAINER -->
+        <div class="modal fade" id="ForgotPass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <ul class="panel-controls" style="margin-top: 2px;">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="panel-collapse"><span class="fa fa-user"></span> Nuevo Cliente</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-edit"></span> Editar Cliente</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-file"></span> Colocar en espera</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-file-o"></span> Recuperar de espera</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-file-o"></span> Recuperar de despacho</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-folder"></span> Historial</a></li>
+                            </ul>                                        
+                        </li>                                        
+                        <li><a style="cursor: pointer;" data-dismiss="modal"><span class="fa fa-times"></span></a></li>
+                    </ul>
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div>
+                    <form class="form-horizontal">
+                        <div class="panel panel-default tabs">                            
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Cliente</a></li>
+                                <li><a href="#tab-second" role="tab" data-toggle="tab">Servicio</a></li>
+                                <li><a href="#tab-third" role="tab" data-toggle="tab">Pago</a></li>
+                            </ul>
+                            <div class="panel-body tab-content modal-body" >
+                                <div class="tab-pane active" id="tab-first">
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Cedula</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Nombre</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Direccion Casa</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Telefono Casa</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Direccion Oficina</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Telefono Oficina</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">E-mail</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    
 
+                                </div>
+                                <div class="tab-pane" id="tab-second">
+                                    <div class="form-group">                                        
+                                        <label class="col-md-3 col-xs-12 control-label">Tipo de servicio:</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control select">
+                                                <option selected="selected">Normal</option>
+                                                <option>Urgente</option>
+                                                <option>Programado</option>
+                                            </select>
+                                        </div>                                            
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Direccion recogida:</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value="John"/>                                                    
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label"></label>
+                                        <div class="col-md-8 col-xs-12">                                            
+                                            <textarea class="form-control" rows="3" placeholder="Que hacemos aqui?"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Direccion entrega:</label>
+                                        <div class="col-md-8 col-xs-12">                                            
+                                            <input type="text" class="form-control" value="Doe"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label"></label>
+                                        <div class="col-md-8 col-xs-12">                                            
+                                            <textarea class="form-control" rows="3" placeholder="Que hacemos aqui?"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label"></label>
+                                        <div class="col-md-9 col-xs-12">                                            
+                                            <a href="#">Agregar direccion</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Ida y vuelta</label>
+                                        <div class="col-md-6 col-xs-12">                                                                                                                                        
+                                            <label class="check"><input type="checkbox" class="icheckbox" checked="checked"/></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">                        
+                                            <!-- START GOOGLE WORLD MAP -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Direcciones</h3>
+                                                </div>
+                                                <div class="panel-body panel-body-map">
+                                                    <div id="google_world_map" style="width: 100%; height: 200px;"></div>
+                                                </div>
+                                            </div>
+                                            <!-- END GOOGLE WORLD MAP-->
+                                        </div>  
+                                    </div>
+                                    
+                                </div>                                        
+                                <div class="tab-pane" id="tab-third" >
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Valor servicio:</label>
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <input type="text" class="form-control" value="10.000"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">                                        
+                                        <label class="col-md-3 col-xs-12 control-label">Metodo de pago</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control select">
+                                                <option selected="selected">Efectivo</option>
+                                                <option>Credito</option>
+                                                <option>Datafono</option>
+                                            </select>
+                                        </div>                                            
+                                    </div>
+                                    
+                                    <div class="form-group">                                        
+                                        <label class="col-md-3 col-xs-12 control-label">Donde cancelan?</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control select">
+                                                <option selected="selected">Direccion 1</option>
+                                                <option>Direccion 2</option>
+                                                <option>Direccion 3</option>
+                                            </select>
+                                        </div>                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                
+                    </form>
+                </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Enviar a despacho</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- MESSAGE BOX-->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
@@ -563,7 +773,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </body>
 </html>

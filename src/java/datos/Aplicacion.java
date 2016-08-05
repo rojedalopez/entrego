@@ -99,7 +99,7 @@ public class Aplicacion {
         return u;
     }
 
-    public static JSONObject obtenerUsuarioJSON(String correo, String pass) throws SQLException{
+    public static JSONObject obtenerMensajeroJSON(String correo, String pass) throws SQLException{
         JSONObject u = null;
         Connection conn=null;
         PreparedStatement insertar=null;
@@ -108,31 +108,27 @@ public class Aplicacion {
              
                 try{
                     conn=conexion();
-                    String instruccion="SELECT c.cod_conductor, tipo_doc_conductor, doc_conductor, " +
-                    "num_lic_conductor, nomb_conductor, apll_conductor, tel_conductor, mail_conductor, salt_conductor, pass_conductor, img_conductor, id_equipoconductor, plca_equipo, pila_equipoconductor " +
-                    "FROM tblConductor AS c LEFT JOIN tblEquipoConductor AS e ON c.cod_conductor = e.cod_conductor AND acti_equipoconductor = 1 WHERE mail_conductor = ? AND acti_conductor = 1;";
+                    String instruccion="SELECT cod_mensajero, email_mensajero, hash_mensajero, passw_mensajero, nombre_mensajero, apellido_mensajero, " +
+                    "celular_mensajero, direccion_mensajero, creacion_mensajero, img_perfil_mensajero FROM tblMensajero " +
+                    "WHERE email_mensajero = ? AND activo_mensajero = 1;";
                     insertar=conn.prepareStatement(instruccion);
                     insertar.setString(1, correo);
                     datos=insertar.executeQuery();
                     if (datos.next()) {
                         //valido las credenciales
-                        String hash = datos.getString(9);
-                        String pasw = datos.getString(10);
+                        String hash = datos.getString(3);
+                        String pasw = datos.getString(4);
                         if(pasw.equals(Metodos.sha512(pass, hash))){
                             //obtengo el Usuario
                             u = new JSONObject();
                             u.put("cod",datos.getString(1));
-                            u.put("correo",datos.getString(8));
+                            u.put("correo",datos.getString(2));
                             u.put("nombre",datos.getString(5));
                             u.put("apellido",datos.getString(6));
-                            u.put("telefono",datos.getString(7));
-                            u.put("tipo_doc",datos.getString(2));
-                            u.put("doc",datos.getString(3));
-                            u.put("num_lic",datos.getString(4));
-                            u.put("url_imagen",datos.getString(11));
-                            u.put("equipo_conductor",datos.getInt(12));
-                            u.put("placa",datos.getString(13));
-                            u.put("pila",datos.getBoolean(14));
+                            u.put("celular",datos.getString(7));
+                            u.put("direccion",datos.getString(8));
+                            u.put("afiliado_desde",formateador.format(formateador.parse(datos.getString(9))));
+                            u.put("url_imagen",datos.getString(10));
                             u.put("mensaje","true");
                             
                             return u;

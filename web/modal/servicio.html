@@ -1,0 +1,194 @@
+<div class="modal" id="modalServicio" tabindex="-1" role="dialog" aria-labelledby="modalServicio">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <ul class="panel-controls" style="margin-top: 2px;">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="panel-collapse"><span class="fa fa-user"></span> Nuevo Cliente</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-edit"></span> Editar Cliente</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-file"></span> Colocar en espera</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-file-o"></span> Recuperar de espera</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-file-o"></span> Recuperar de despacho</a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-folder"></span> Historial</a></li>
+                            </ul>                                        
+                        </li>                                        
+                        <li><a href="#" data-dismiss="modal"><span class="fa fa-times"></span></a></li>
+                    </ul>
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div>
+                    <form class="form-horizontal">
+                        <div class="panel panel-default tabs">                            
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Cliente</a></li>
+                                <li><a href="#tab-second" role="tab" data-toggle="tab">Servicio</a></li>
+                                <li><a href="#tab-third" role="tab" data-toggle="tab">Pago</a></li>
+                            </ul>
+                            <div class="panel-body tab-content modal-body" >
+                                <div class="tab-pane active" id="tab-first">
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Cedula</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Nombre</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Direccion Casa</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Telefono Casa</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Direccion Oficina</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Telefono Oficina</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">E-mail</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    
+
+                                </div>
+                                <div class="tab-pane" id="tab-second">
+                                    <div class="form-group">                                        
+                                        <label class="col-md-3 col-xs-12 control-label">Tipo de servicio:</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control select">
+                                                <option selected="selected">Normal</option>
+                                                <option>Urgente</option>
+                                                <option>Programado</option>
+                                            </select>
+                                        </div>                                            
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Direccion recogida:</label>
+                                        <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                            <input type="text" class="form-control" value="John"/>                                                    
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label"></label>
+                                        <div class="col-md-8 col-xs-12">                                            
+                                            <textarea class="form-control" rows="3" placeholder="Que hacemos aqui?"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Direccion entrega:</label>
+                                        <div class="col-md-8 col-xs-12">                                            
+                                            <input type="text" class="form-control" value="Doe"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label"></label>
+                                        <div class="col-md-8 col-xs-12">                                            
+                                            <textarea class="form-control" rows="3" placeholder="Que hacemos aqui?"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label"></label>
+                                        <div class="col-md-9 col-xs-12">                                            
+                                            <a href="#">Agregar direccion</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Ida y vuelta</label>
+                                        <div class="col-md-6 col-xs-12">                                                                                                                                        
+                                            <label class="check"><input type="checkbox" class="icheckbox" checked="checked"/></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">                        
+                                            <!-- START GOOGLE WORLD MAP -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Direcciones</h3>
+                                                </div>
+                                                <div class="panel-body panel-body-map">
+                                                    <div id="google_world_map" style="width: 100%; height: 200px;"></div>
+                                                </div>
+                                            </div>
+                                            <!-- END GOOGLE WORLD MAP-->
+                                        </div>  
+                                    </div>
+                                    
+                                </div>                                        
+                                <div class="tab-pane" id="tab-third" >
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Valor servicio:</label>
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <input type="text" class="form-control" value="10.000"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">                                        
+                                        <label class="col-md-3 col-xs-12 control-label">Metodo de pago</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control select">
+                                                <option selected="selected">Efectivo</option>
+                                                <option>Credito</option>
+                                                <option>Datafono</option>
+                                            </select>
+                                        </div>                                            
+                                    </div>
+                                    
+                                    <div class="form-group">                                        
+                                        <label class="col-md-3 col-xs-12 control-label">Donde cancelan?</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control select">
+                                                <option selected="selected">Direccion 1</option>
+                                                <option>Direccion 2</option>
+                                                <option>Direccion 3</option>
+                                            </select>
+                                        </div>                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                
+                    </form>
+                </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Enviar a despacho</button>
+              </div>
+            </div>
+          </div>
+        </div>

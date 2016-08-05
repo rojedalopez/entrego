@@ -1,3 +1,14 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+response.setHeader("Pragma", "No-chache"); 
+response.setHeader("Expires", "0"); 
+response.setHeader("Cache-Control", "no-cache"); 
+response.setHeader("Cache", "no-cache"); 
+if(session.getAttribute("user") == null){
+   //redirijo al login
+   response.sendRedirect("../entrego/?mensaje=Acabo su sesion.");
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>        
@@ -92,7 +103,7 @@
                     </li>
                     <li class="xn-title">Navigation</li>
                     <li class="active">
-                        <a href="index.html"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>                        
+                        <a href="principal.jsp"><span class="fa fa-desktop"></span> <span class="xn-text">Inicio</span></a>                        
                     </li>                    
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Pages</span></a>

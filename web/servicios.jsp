@@ -1,0 +1,789 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+response.setHeader("Pragma", "No-chache"); 
+response.setHeader("Expires", "0"); 
+response.setHeader("Cache-Control", "no-cache"); 
+response.setHeader("Cache", "no-cache"); 
+if(session.getAttribute("user") == null){
+   //redirijo al login
+   response.sendRedirect("../entrego/?mensaje=Acabo su sesion.");
+}
+%>
+<!DOCTYPE html>
+<html lang="en">
+    <head>        
+        <!-- META SECTION -->
+        <title>Joli Admin - Responsive Bootstrap Admin Template</title>            
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!-- END META SECTION -->
+        
+        <!-- CSS INCLUDE -->        
+        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script> 
+        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
+        <!-- Latest compiled and minified CSS -->
+        <link href="css/dataTables.bootstrap.min.css" rel="stylesheet" />
+        <!-- EOF CSS INCLUDE -->                                    
+        <script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyCqUEyO3rTumxb0G-oRsyBnZLn4O9VKtiM"></script>
+    <!-- START SCRIPTS -->
+        <!-- START PLUGINS -->
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.responsive.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>        
+        <!-- END PLUGINS -->
+        
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-strap.min.js"></script>
+        <script src="js/angular-strap.tpl.min.js"></script>
+        <script src="js/angular-animate.js"></script>
+        <script src="js/ui-bootstrap-tpls-2.0.0.js"></script>
+
+        <script src="js/bootstrap.min.js"></script>  
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.responsive.min.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/bootstrap-datetimepicker.min.js"></script>
+        <script src="js/angular-eonasdan-datetimepicker.min.js"></script>
+        <script src="js/dist/angular-datatables.min.js"></script>
+        
+        <script type="text/javascript" src="js/angular/dirPagination.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>      
+        <script type="text/javascript" src="js/angular/angular-validator.js"></script>
+        <script type="text/javascript" src="js/angular/ng-map.min.js"></script>
+        <script type="text/javascript" src="js/angular/servicios.js"></script>
+        
+
+        <!-- START THIS PAGE PLUGINS-->        
+        <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>        
+        <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+        <script type="text/javascript" src="js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+        
+        <script type="text/javascript" src="js/plugins/morris/raphael-min.js"></script>
+        <script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>               
+        
+        <script type="text/javascript" src="js/plugins/moment.min.js"></script>
+        <script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script>
+        <!-- END THIS PAGE PLUGINS-->        
+        
+        <!-- START TEMPLATE -->
+        <script type="text/javascript" src="js/settings.js"></script>
+        
+        <script type="text/javascript" src="js/plugins.js"></script>        
+        <script type="text/javascript" src="js/actions.js"></script>
+        
+        <script type="text/javascript" src="js/demo_dashboard.js"></script>
+        
+    </head>
+    <body ng-app="myApp" class="ng-cloak">
+        <!-- START PAGE CONTAINER -->
+        <div class="page-container" ng-controller="ServiciosController as ctrl">
+            
+            <!-- START PAGE SIDEBAR -->
+            <div class="page-sidebar">
+                <!-- START X-NAVIGATION -->
+                <ul class="x-navigation">
+                    <li class="xn-logo">
+                        <a href="index.html">Joli Admin</a>
+                        <a href="#" class="x-navigation-control"></a>
+                    </li>
+                    <li class="xn-profile">
+                        <a href="#" class="profile-mini">
+                            <img src="assets/images/users/avatar.jpg" alt="John Doe"/>
+                        </a>
+                        <div class="profile">
+                            <div class="profile-image">
+                                <img src="assets/images/users/avatar.jpg" alt="John Doe"/>
+                            </div>
+                            <div class="profile-data">
+                                <div class="profile-data-name">John Doe</div>
+                                <div class="profile-data-title">Web Developer/Designer</div>
+                            </div>
+                            <div class="profile-controls">
+                                <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>
+                            </div>
+                        </div>                                                                        
+                    </li>
+                    <li class="xn-title">Navigation</li>
+                    <li class="active">
+                        <a href="principal.jsp"><span class="fa fa-desktop"></span> <span class="xn-text">Inicio</span></a>                        
+                    </li>                    
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Pages</span></a>
+                        <ul>
+                            <li><a href="pages-gallery.html"><span class="fa fa-image"></span> Gallery</a></li>
+                            <li><a href="pages-profile.html"><span class="fa fa-user"></span> Profile</a></li>
+                            <li><a href="pages-address-book.html"><span class="fa fa-users"></span> Address Book</a></li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-clock-o"></span> Timeline</a>
+                                <ul>
+                                    <li><a href="pages-timeline.html"><span class="fa fa-align-center"></span> Default</a></li>
+                                    <li><a href="pages-timeline-simple.html"><span class="fa fa-align-justify"></span> Full Width</a></li>
+                                </ul>
+                            </li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-envelope"></span> Mailbox</a>
+                                <ul>
+                                    <li><a href="pages-mailbox-inbox.html"><span class="fa fa-inbox"></span> Inbox</a></li>
+                                    <li><a href="pages-mailbox-message.html"><span class="fa fa-file-text"></span> Message</a></li>
+                                    <li><a href="pages-mailbox-compose.html"><span class="fa fa-pencil"></span> Compose</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="pages-messages.html"><span class="fa fa-comments"></span> Messages</a></li>
+                            <li><a href="pages-calendar.html"><span class="fa fa-calendar"></span> Calendar</a></li>
+                            <li><a href="pages-tasks.html"><span class="fa fa-edit"></span> Tasks</a></li>
+                            <li><a href="pages-content-table.html"><span class="fa fa-columns"></span> Content Table</a></li>
+                            <li><a href="pages-faq.html"><span class="fa fa-question-circle"></span> FAQ</a></li>
+                            <li><a href="pages-search.html"><span class="fa fa-search"></span> Search</a></li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-file"></span> Blog</a>
+                                
+                                <ul>                                    
+                                    <li><a href="pages-blog-list.html"><span class="fa fa-copy"></span> List of Posts</a></li>
+                                    <li><a href="pages-blog-post.html"><span class="fa fa-file-o"></span>Single Post</a></li>
+                                </ul>
+                            </li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-sign-in"></span> Login</a>
+                                <ul>                                    
+                                    <li><a href="pages-login.html">App Login</a></li>
+                                    <li><a href="pages-login-website.html">Website Login</a></li>
+                                    <li><a href="pages-login-website-light.html"> Website Login Light</a></li>
+                                </ul>
+                            </li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-warning"></span> Error Pages</a>
+                                <ul>                                    
+                                    <li><a href="pages-error-404.html">Error 404 Sample 1</a></li>
+                                    <li><a href="pages-error-404-2.html">Error 404 Sample 2</a></li>
+                                    <li><a href="pages-error-500.html"> Error 500</a></li>
+                                </ul>
+                            </li>                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Layouts</span></a>
+                        <ul>
+                            <li><a href="layout-boxed.html">Boxed</a></li>
+                            <li><a href="layout-nav-toggled.html">Navigation Toggled</a></li>
+                            <li><a href="layout-nav-top.html">Navigation Top</a></li>
+                            <li><a href="layout-nav-right.html">Navigation Right</a></li>
+                            <li><a href="layout-nav-top-fixed.html">Top Navigation Fixed</a></li>                            
+                            <li><a href="layout-nav-custom.html">Custom Navigation</a></li>
+                            <li><a href="layout-frame-left.html">Frame Left Column</a></li>
+                            <li><a href="layout-frame-right.html">Frame Right Column</a></li>
+                            <li><a href="layout-search-left.html">Search Left Side</a></li>
+                            <li><a href="blank.html">Blank Page</a></li>
+                        </ul>
+                    </li>
+                    <li class="xn-title">Components</li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">UI Kits</span></a>                        
+                        <ul>
+                            <li><a href="ui-widgets.html"><span class="fa fa-heart"></span> Widgets</a></li>                            
+                            <li><a href="ui-elements.html"><span class="fa fa-cogs"></span> Elements</a></li>
+                            <li><a href="ui-buttons.html"><span class="fa fa-square-o"></span> Buttons</a></li>                            
+                            <li><a href="ui-panels.html"><span class="fa fa-pencil-square-o"></span> Panels</a></li>
+                            <li><a href="ui-icons.html"><span class="fa fa-magic"></span> Icons</a><div class="informer informer-warning">+679</div></li>
+                            <li><a href="ui-typography.html"><span class="fa fa-pencil"></span> Typography</a></li>
+                            <li><a href="ui-portlet.html"><span class="fa fa-th"></span> Portlet</a></li>
+                            <li><a href="ui-sliders.html"><span class="fa fa-arrows-h"></span> Sliders</a></li>
+                            <li><a href="ui-alerts-popups.html"><span class="fa fa-warning"></span> Alerts & Popups</a></li>                            
+                            <li><a href="ui-lists.html"><span class="fa fa-list-ul"></span> Lists</a></li>
+                            <li><a href="ui-tour.html"><span class="fa fa-random"></span> Tour</a></li>
+                        </ul>
+                    </li>                    
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-pencil"></span> <span class="xn-text">Forms</span></a>
+                        <ul>
+                            <li>
+                                <a href="form-layouts-two-column.html"><span class="fa fa-tasks"></span> Form Layouts</a>
+                                <div class="informer informer-danger">New</div>
+                                <ul>
+                                    <li><a href="form-layouts-one-column.html"><span class="fa fa-align-justify"></span> One Column</a></li>
+                                    <li><a href="form-layouts-two-column.html"><span class="fa fa-th-large"></span> Two Column</a></li>
+                                    <li><a href="form-layouts-tabbed.html"><span class="fa fa-table"></span> Tabbed</a></li>
+                                    <li><a href="form-layouts-separated.html"><span class="fa fa-th-list"></span> Separated Rows</a></li>
+                                </ul> 
+                            </li>
+                            <li><a href="form-elements.html"><span class="fa fa-file-text-o"></span> Elements</a></li>
+                            <li><a href="form-validation.html"><span class="fa fa-list-alt"></span> Validation</a></li>
+                            <li><a href="form-wizards.html"><span class="fa fa-arrow-right"></span> Wizards</a></li>
+                            <li><a href="form-editors.html"><span class="fa fa-text-width"></span> WYSIWYG Editors</a></li>
+                            <li><a href="form-file-handling.html"><span class="fa fa-floppy-o"></span> File Handling</a></li>
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="tables.html"><span class="fa fa-table"></span> <span class="xn-text">Tables</span></a>
+                        <ul>                            
+                            <li><a href="table-basic.html"><span class="fa fa-align-justify"></span> Basic</a></li>
+                            <li><a href="table-datatables.html"><span class="fa fa-sort-alpha-desc"></span> Data Tables</a></li>
+                            <li><a href="table-export.html"><span class="fa fa-download"></span> Export Tables</a></li>                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-bar-chart-o"></span> <span class="xn-text">Charts</span></a>
+                        <ul>
+                            <li><a href="charts-morris.html"><span class="xn-text">Morris</span></a></li>
+                            <li><a href="charts-nvd3.html"><span class="xn-text">NVD3</span></a></li>
+                            <li><a href="charts-rickshaw.html"><span class="xn-text">Rickshaw</span></a></li>
+                            <li><a href="charts-other.html"><span class="xn-text">Other</span></a></li>
+                        </ul>
+                    </li>                    
+                    <li>
+                        <a href="maps.html"><span class="fa fa-map-marker"></span> <span class="xn-text">Maps</span></a>
+                    </li>                    
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-sitemap"></span> <span class="xn-text">Navigation Levels</span></a>
+                        <ul>                            
+                            <li class="xn-openable">
+                                <a href="#">Second Level</a>
+                                <ul>
+                                    <li class="xn-openable">
+                                        <a href="#">Third Level</a>
+                                        <ul>
+                                            <li class="xn-openable">
+                                                <a href="#">Fourth Level</a>
+                                                <ul>
+                                                    <li><a href="#">Fifth Level</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>                            
+                        </ul>
+                    </li>
+                    
+                </ul>
+                <!-- END X-NAVIGATION -->
+            </div>
+            <!-- END PAGE SIDEBAR -->
+            
+            <!-- PAGE CONTENT -->
+            <div class="page-content">
+                
+                <!-- START X-NAVIGATION VERTICAL -->
+                <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                    <!-- TOGGLE NAVIGATION -->
+                    <li class="xn-icon-button">
+                        <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+                    </li>
+                    <!-- END TOGGLE NAVIGATION -->
+                    <!-- SEARCH -->
+                    <li class="xn-search">
+                        <form role="form">
+                            <input type="text" name="search" placeholder="Search..."/>
+                        </form>
+                    </li>   
+                    <!-- END SEARCH -->
+                    <!-- SIGN OUT -->
+                    <li class="xn-icon-button pull-right">
+                        <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>                        
+                    </li> 
+                    <!-- END SIGN OUT -->
+                    <!-- MESSAGES -->
+                    <li class="xn-icon-button pull-right">
+                        <a href="#"><span class="fa fa-comments"></span></a>
+                        <div class="informer informer-danger">4</div>
+                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="fa fa-comments"></span> Messages</h3>                                
+                                <div class="pull-right">
+                                    <span class="label label-danger">4 new</span>
+                                </div>
+                            </div>
+                            <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
+                                <a href="#" class="list-group-item">
+                                    <div class="list-group-status status-online"></div>
+                                    <img src="assets/images/users/user2.jpg" class="pull-left" alt="John Doe"/>
+                                    <span class="contacts-title">John Doe</span>
+                                    <p>Praesent placerat tellus id augue condimentum</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="list-group-status status-away"></div>
+                                    <img src="assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk"/>
+                                    <span class="contacts-title">Dmitry Ivaniuk</span>
+                                    <p>Donec risus sapien, sagittis et magna quis</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="list-group-status status-away"></div>
+                                    <img src="assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali"/>
+                                    <span class="contacts-title">Nadia Ali</span>
+                                    <p>Mauris vel eros ut nunc rhoncus cursus sed</p>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <div class="list-group-status status-offline"></div>
+                                    <img src="assets/images/users/user6.jpg" class="pull-left" alt="Darth Vader"/>
+                                    <span class="contacts-title">Darth Vader</span>
+                                    <p>I want my money back!</p>
+                                </a>
+                            </div>     
+                            <div class="panel-footer text-center">
+                                <a href="pages-messages.html">Show all messages</a>
+                            </div>                            
+                        </div>                        
+                    </li>
+                    <!-- END MESSAGES -->
+                    <!-- TASKS -->
+                    <li class="xn-icon-button pull-right">
+                        <a href="#"><span class="fa fa-tasks"></span></a>
+                        <div class="informer informer-warning">3</div>
+                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="fa fa-tasks"></span> Tasks</h3>                                
+                                <div class="pull-right">
+                                    <span class="label label-warning">3 active</span>
+                                </div>
+                            </div>
+                            <div class="panel-body list-group scroll" style="height: 200px;">                                
+                                <a class="list-group-item" href="#">
+                                    <strong>Phasellus augue arcu, elementum</strong>
+                                    <div class="progress progress-small progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">50%</div>
+                                    </div>
+                                    <small class="text-muted">John Doe, 25 Sep 2014 / 50%</small>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                    <strong>Aenean ac cursus</strong>
+                                    <div class="progress progress-small progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
+                                    </div>
+                                    <small class="text-muted">Dmitry Ivaniuk, 24 Sep 2014 / 80%</small>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                    <strong>Lorem ipsum dolor</strong>
+                                    <div class="progress progress-small progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">95%</div>
+                                    </div>
+                                    <small class="text-muted">John Doe, 23 Sep 2014 / 95%</small>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                    <strong>Cras suscipit ac quam at tincidunt.</strong>
+                                    <div class="progress progress-small">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
+                                    </div>
+                                    <small class="text-muted">John Doe, 21 Sep 2014 /</small><small class="text-success"> Done</small>
+                                </a>                                
+                            </div>     
+                            <div class="panel-footer text-center">
+                                <a href="pages-tasks.html">Show all tasks</a>
+                            </div>                            
+                        </div>                        
+                    </li>
+                    <!-- END TASKS -->
+                </ul>
+                <!-- END X-NAVIGATION VERTICAL -->                     
+
+                <!-- START BREADCRUMB -->
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>                    
+                    <li class="active">Dashboard</li>
+                </ul>
+                <!-- END BREADCRUMB -->                       
+                
+                <!-- PAGE CONTENT WRAPPER -->
+                <div class="page-content-wrap">
+                    
+                    <!-- START WIDGETS -->                    
+                    <div class="row">   
+                         
+                        
+                        <div class="col-md-3">
+                            
+                            <!-- START WIDGET REGISTRED -->
+                            <div class="widget widget-default widget-item-icon" ng-click="ctrl.showModalPedido()">
+                                <div class="widget-item-left">
+                                    <span class="fa fa-user"></span>
+                                </div>
+                                <div class="widget-data">
+                                    <div class="widget-int num-count">+</div>
+                                    <div class="widget-title">Nuevo servicio</div>
+                                    <div class="widget-subtitle">Formulario para crear un servicio</div>
+                                </div>                      
+                            </div>                            
+                            <!-- END WIDGET REGISTRED -->
+                        </div>
+                        <div class="col-md-3">                            
+                            <!-- START WIDGET REGISTRED -->
+                            <div class="widget widget-default widget-item-icon" onclick="location.href='pages-address-book.html';">
+                                <div class="widget-item-left">
+                                    <span class="fa fa-users"></span>
+                                </div>
+                                <div class="widget-data">
+                                    <div class="widget-int num-count">--</div>
+                                    <div class="widget-title">Despacho</div>
+                                    <div class="widget-subtitle">Servicios que se encuentran en despacho</div>
+                                </div>                      
+                            </div>                            
+                            <!-- END WIDGET REGISTRED -->
+                        </div>
+                        
+                        <div class="col-md-3">                            
+                            <!-- START WIDGT REGISTRED -->
+                            <div class="widget widget-default widget-item-icon" onclick="location.href='pages-address-book.html';">
+                                <div class="widget-item-left">
+                                    <span class="fa fa-users"></span>
+                                </div>
+                                <div class="widget-data">
+                                    <div class="widget-int num-count">--</div>
+                                    <div class="widget-title">Despachados</div>
+                                    <div class="widget-subtitle">Servicios que se encuentran despachados</div>
+                                </div>                      
+                            </div>                            
+                            <!-- END WIDGET REGISTRED -->
+                        </div>
+                        <div class="col-md-3">
+
+                            <div class="widget widget-primary widget-item-icon">
+                                <div class="widget-item-left">
+                                    <span class="fa fa-users"></span>
+                                </div>
+                                <div class="widget-data">
+                                    <div class="widget-int num-count">--</div>
+                                    <div class="widget-title">Consulta general</div>
+                                    <div class="widget-subtitle">Dashboard de mis servicios</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- END WIDGETS -->                                        
+                    
+                    
+                    <div class="row">
+			<div class="col-md-12">                            
+                            <!-- START SALES BLOCK -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title-box">
+                                        <h3>Lista de mis servicios</h3>
+                                        <span>Listado de la información de mis servicios</span>
+                                    </div>                                     
+                                    <ul class="panel-controls panel-controls-title">             
+                                        <li><a href="#" class="panel-fullscreen rounded"><span class="fa fa-expand"></span></a></li>
+                                    </ul>                                    
+                                    
+                                </div>
+                                <div class="panel-body">                                    
+                                    <div class="col-md-12">
+                            
+                                        <!-- START DATATABLE EXPORT -->
+                                        <div class="panel panel-default">
+                                            <div class="row">
+                        <div class="col-md-12">
+                            
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                                <p>Utiliza este campo para buscar algún pedido. Puedes buscarlo por: numero de pedido, punto de inicio, punto final.</p>
+                                                <form class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <span class="fa fa-search"></span>
+                                                                </div>
+                                                                <input type="text" ng-model="ctrl.busqueda.q" class="form-control" placeholder="A quien buscabas?"/>
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn btn-primary" ng-click="ctrl.buscarPedido()">Buscar</button>
+                                                                </div>
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn btn-default" ng-click="ctrl.limpiarPedidos()">Limpiar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>                                    
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                            <div class="panel-body">
+                                                <table class="table table-striped table-bordered dt-responsive compact table-hover" width="100%" cellspacing="0" datatable="ng" dt-options="ctrl.dtOptions" id="dataTables-regs">
+                                                    <thead>
+                                                        <tr>
+                                                            <th># Servicio</th>
+                                                            <th>Estado</th>
+                                                            <th>Origen</th>
+                                                            <th>Destino</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr dir-paginate="servicio in ctrl.servicios | itemsPerPage:ctrl.itemsPerPage: 'Regs'" pagination-id="Regs" total-items="ctrl.total_count">
+                                                            <td>{{servicio.cod_servicio}}</td>
+                                                            <td>{{servicio.desc_estado}}</td>
+                                                            <td>{{servicio.dir_origen}}</td>
+                                                            <td>{{servicio.dir_destino}}</td>
+                                                            <td style="text-align: center;"> <i class="fa fa-info-circle fa-2x" style="cursor: pointer;" ng-click="ctrl.verDetalleServ(servicio.cod_servicio)"></i></td>
+                                                            <td style="text-align: center;"> <i class="fa fa-cogs fa-2x" style="cursor: pointer;" ng-click="ctrl.verDetalleServ(servicio.cod_servicio)"></i></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <dir-pagination-controls
+                                                    max-size="8"
+                                                    direction-links="true"
+                                                    boundary-links="true" 
+                                                    on-page-change="ctrl.getData(newPageNumber)"
+                                                    pagination-id="Regs">
+                                                </dir-pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- END SALES BLOCK -->                            
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <form class="form-horizontal">
+                                <div class="panel panel-default tabs">                            
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Cliente</a></li>
+                                        <li><a href="#tab-second" role="tab" data-toggle="tab" ng-click="ctrl.reloadMap()">Servicio</a></li>
+                                        <li><a href="#tab-third" role="tab" data-toggle="tab">Pago</a></li>
+                                    </ul>
+                                    <div class="panel-body tab-content modal-body" >
+                                        <div class="tab-pane active" id="tab-first">
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Cedula</label>
+                                                <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Nombre</label>
+                                                <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Direccion Casa</label>
+                                                <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Telefono Casa</label>
+                                                <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Direccion Oficina</label>
+                                                <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Telefono Oficina</label>
+                                                <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">E-mail</label>
+                                                <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                                    <input type="text" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="tab-pane" id="tab-second">
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Tipo de servicio:</label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select">
+                                                        <option selected="selected">Normal</option>
+                                                        <option>Urgente</option>
+                                                        <option>Programado</option>
+                                                    </select>
+                                                </div>                                            
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Direccion recogida:</label>
+                                                <div class="col-md-8 col-xs-12">                                                                                                                                                        
+                                                    <input places-auto-complete
+                                                    ng-model="ctrl.origenServicio"
+                                                    component-restrictions="{country:'co'}"
+                                                    on-place-changed="ctrl.placeChanged()" 
+                                                    id-direccion='origen'
+                                                    class="form-control"
+                                                    type="text" name="origenServicio" style="z-index: 9999;"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label"></label>
+                                                <div class="col-md-8 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="3" placeholder="Que hacemos aqui?"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Direccion entrega:</label>
+                                                <div class="col-md-8 col-xs-12">                                            
+                                                    <input places-auto-complete
+                                                    ng-model="ctrl.destinoServicio"
+                                                    component-restrictions="{country:'co'}"
+                                                    on-place-changed="ctrl.placeChanged()" 
+                                                    id-direccion='destino'
+                                                    class="form-control"
+                                                    type="text" name="destinoServicio" style="z-index: 9999;"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label"></label>
+                                                <div class="col-md-8 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="3" placeholder="Que hacemos aqui?"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div ng-repeat="dirAdicional in ctrl.dirAdicionales track by $index">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 col-xs-12 control-label">Direccion adicional:</label>
+                                                    <div class="col-md-8 col-xs-12 input-group">
+                                                        <input places-auto-complete
+                                                        ng-model="dirAdicional.texto"
+                                                        component-restrictions="{country:'co'}"
+                                                        on-place-changed="ctrl.placeChanged()" 
+                                                        id-direccion='direccionA{{$index}}'
+                                                        class="form-control"
+                                                        type="text" name="destinoServicio" style="z-index: 9999;"/>
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-danger" 
+                                                                    ng-click="ctrl.deleteDireccion(dirAdicional)">Quitar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label"></label>
+                                                <div class="col-md-9 col-xs-12">                                            
+                                                    <a  ng-click="ctrl.add()">Agregar direccion</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Ida y vuelta</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                                                                        
+                                                    <label class="check"><input type="checkbox" class="icheckbox" checked="checked"/></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">                        
+                                                    <!-- START GOOGLE WORLD MAP -->
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">Direcciones</h3>
+                                                        </div>
+                                                        <div class="panel-body panel-body-map">
+                                                            <ng-map center="10.5344,-73.0452" zoom="7" style="width: 100%; height: 200px;">
+                                                                <marker id='{{direccion.texto}}' position="{{direccion.lat}},{{direccion.lng}}" 
+                                                                on-click="ctrl.showDetail(direccion)" ng-repeat="direccion in ctrl.direcciones track by $index"></marker>
+                                                                <info-window id="foo-iw">
+                                                                    <div ng-non-bindable="">
+                                                                        Direccion: {{ctrl.direccion.texto}}
+                                                                    </div>
+                                                                </info-window>
+                                                              </ng-map>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END GOOGLE WORLD MAP-->
+                                                </div>  
+                                            </div>
+
+                                        </div>                                        
+                                        <div class="tab-pane" id="tab-third">
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Valor servicio:</label>
+                                                <div class="col-md-6 col-xs-12">                                            
+                                                    <input type="text" class="form-control" value="10.000"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Metodo de pago</label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select">
+                                                        <option selected="selected">Efectivo</option>
+                                                        <option>Credito</option>
+                                                        <option>Datafono</option>
+                                                    </select>
+                                                </div>                                            
+                                            </div>
+
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 col-xs-12 control-label">Donde cancelan?</label>
+                                                <div class="col-md-6">
+                                                    <select class="form-control select">
+                                                        <option selected="selected">Direccion 1</option>
+                                                        <option>Direccion 2</option>
+                                                        <option>Direccion 3</option>
+                                                    </select>
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </form>
+                        </div>
+                    
+                        <!-- START DASHBOARD CHART -->
+                        <div class="chart-holder" id="dashboard-area-1" style="height: 200px;"></div>
+                        <div class="block-full-width">                                                                       
+                        </div>                    
+                        <!-- END DASHBOARD CHART -->                    
+                    </div>
+                <!-- END PAGE CONTENT WRAPPER -->                                
+            </div>            
+            <!-- END PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTAINER -->
+
+        <!-- MESSAGE BOX-->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to log out?</p>                    
+                        <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
+                            <button class="btn btn-default btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>
+
+
+
+
+
+
